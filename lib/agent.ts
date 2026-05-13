@@ -203,6 +203,7 @@ export async function runAgent(
 
     let fullContent = "";
     const apiResp = await callZhipuStream(messages, tools, SYSTEM_PROMPT, {
+      // 流式文本回调
       onTextChunk(chunk) {
         fullContent += chunk;
         callbacks.onStreamText?.(chunk);

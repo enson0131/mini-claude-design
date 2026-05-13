@@ -161,14 +161,12 @@ export default function HomePage() {
         streamingMessageRef.current = "";
 
         const callbacks: AgentCallbacks = {
-          onText(t) {
-            setStreamingText("");
-            addEntry("system", t);
-          },
+          // 流式文本回调
           onStreamText(chunk) {
             streamingMessageRef.current += chunk;
             setStreamingText((prev) => prev + chunk);
           },
+          // 完成大模型一次调用后的回调
           onAssistantMessage(text) {
             const content = text.trim();
             if (!content) return;
@@ -176,9 +174,16 @@ export default function HomePage() {
             streamingMessageRef.current = "";
             setStreamingText("");
           },
+          // 完成大模型一次调用后的回调
+          onText(t) {
+            setStreamingText("");
+            addEntry("system", t);
+          },
+          // 工具调用前的回调
           onToolCall(name, inputObj) {
             addEntry("tool-call", JSON.stringify(inputObj, null, 2), name);
           },
+          // 工具调用后的回调
           onToolResult(name, result) {
             const d = typeof result === "string" ? result : JSON.stringify(result, null, 2);
             addEntry("tool-result", d, name);
@@ -206,6 +211,7 @@ export default function HomePage() {
               }
             }
           },
+          // 任务完成的回调
           onDone(usage) {
             const t = (usage.prompt_tokens || 0) + (usage.completion_tokens || 0);
             setStreamingText("");

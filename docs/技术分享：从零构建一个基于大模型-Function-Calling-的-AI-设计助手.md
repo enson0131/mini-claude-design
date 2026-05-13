@@ -1,72 +1,19 @@
-# Mini Claude Design
+# 从零构建一个基于大模型 Function Calling 的 AI 设计助手
 
-基于 Next.js + React + TypeScript + Tailwind CSS + 智谱 AI 大模型的网页设计助手。
+> 本文以 Mini Claude Design 项目为例，深入剖析如何利用大语言模型的 Function Calling 能力，构建一个"对话即设计"的 AI 应用。全文围绕 Agent Loop、工具系统、流式通信、上下文管理四大核心模块展开。
 
-## 功能
+---
 
-- 聊天驱动的 AI 设计助手，通过自然语言描述生成 HTML/CSS/JS 设计产物
-- 实时文件管理和代码预览
-- 支持多种智谱 AI 模型选择（GLM-4 Flash / Air / Plus 等）
-- 流式输出，实时查看生成过程
-- 工具调用可视化（文件读写、上下文裁剪）
+## 一、项目概览
 
-## 技术栈
+### 1.1 我们要解决什么问题？
 
-- **框架**: Next.js 15 (App Router)
-- **语言**: TypeScript
-- **样式**: Tailwind CSS 4
-- **AI**: 智谱 AI (GLM) API + Function Calling
-- **部署**: Vercel
+传统的网页设计流程是：设计师在 Figma/Sketch 中出图 → 前端工程师手动编码实现。这个流程存在两个核心痛点：
 
-## 开始使用
+1. **沟通成本高**：需求方用自然语言描述需求，设计师转译为视觉语言，工程师再转译为代码语言，每一次转译都可能产生信息损耗。
+2. **反馈周期长**：从需求到可交互的代码产物，中间需要多轮评审和修改。
 
-```bash
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-
-# 构建生产版本
-npm run build
-```
-
-打开浏览器访问 [http://localhost:3000](http://localhost:3000)，点击右上角 "API Key" 按钮设置你的智谱 AI API Key。
-
-## 部署到 Vercel
-
-1. 将代码推送到 GitHub
-2. 在 [Vercel](https://vercel.com) 导入仓库
-3. 自动检测 Next.js 框架并部署
-
-## 项目结构
-
-```
-├── app/
-│   ├── api/chat/route.ts    # 智谱 AI API 流式代理
-│   ├── globals.css           # 全局样式
-│   ├── layout.tsx            # 根布局
-│   └── page.tsx              # 主页面
-├── components/
-│   ├── ApiKeyDialog.tsx      # API Key 设置弹窗
-│   ├── ChatPanel.tsx         # 聊天面板
-│   ├── FilesPanel.tsx        # 文件管理面板
-│   ├── PreviewPanel.tsx      # 预览面板
-│   ├── ResizeHandle.tsx      # 拖拽分隔条
-│   ├── ToolCard.tsx          # 工具调用卡片
-│   └── TopBar.tsx            # 顶部栏
-├── lib/
-│   ├── agent.ts              # Agent Loop 核心逻辑
-│   ├── llm.ts                # 智谱 AI API 客户端
-│   ├── types.ts              # 类型定义
-│   └── tools/
-│       ├── filesystem.ts     # 文件系统工具
-│       ├── index.ts          # 工具注册表
-│       └── snip.ts           # 上下文裁剪工具
-└── package.json
-```
-
-## 项目技术细节解析
+这个项目的目标：让用户直接用自然语言描述需求，AI 理解后自动生成高保真、模块化的 HTML/CSS/JS 代码，并实时预览。
 
 ### 1.2 核心架构
 
@@ -74,8 +21,8 @@ npm run build
 ┌──────────────────────────────────────────────────────────────┐
 │                         浏览器 (前端)                          │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────┐ │
-│  │ ChatPanel│  │FilesPanel│  │PreviewPanel│  │  状态管理      │ │
-│  │ (对话面板)│  │(文件面板) │  │ (预览面板) │  │ (React State)│ │
+│  │ ChatPanel│  │FilesPanel│  │Preview   │  │  状态管理      │ │
+│  │ (对话面板)│  │(文件面板) │  │Panel     │  │ (React State)│ │
 │  └─────┬────┘  └─────┬────┘  └─────┬────┘  └──────┬───────┘ │
 │        └──────────────┴─────────────┴───────────────┘         │
 │                              │                                │
@@ -521,3 +468,8 @@ System Prompt
 3. **并发处理**：Agent 运行时允许用户继续操作
 4. **预览安全**：iframe sandbox 的 `allow-same-origin` 需要重新评估
 
+### 7.3 写在最后
+
+这个项目虽然名为"Mini"，但完整呈现了 AI Agent 应用的核心架构——Agent Loop、工具系统、流式通信三大模块。理解了这些，就能理解 Claude Code、Cursor、Devin 等更复杂系统的基础运行原理。
+
+AI Agent 的本质不是让 AI "更聪明"，而是让 AI "能行动"。Function Calling 是桥梁，Agent Loop 是引擎，工具系统是手脚。当这三者组合在一起，LLM 就从"百科全书"变成了"执行者"。
