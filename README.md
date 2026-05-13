@@ -2,6 +2,8 @@
 
 基于 Next.js + React + TypeScript + Tailwind CSS + 智谱 AI 大模型的网页设计助手。
 
+此项目大量参考了 [Snake-design](https://github.com/lizuncong/snake-design), 致敬🫡 lizuncong
+
 ## 功能
 
 - 聊天驱动的 AI 设计助手，通过自然语言描述生成 HTML/CSS/JS 设计产物
