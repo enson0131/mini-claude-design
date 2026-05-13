@@ -103,6 +103,7 @@ export function trimMessages(
   let removedCount = 0;
   const result: ChatMessage[] = [];
   for (const msg of messages) {
+    // 不是 user 消息直接保留
     if (msg.role !== "user") {
       result.push(msg);
       continue;
