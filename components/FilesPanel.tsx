@@ -33,7 +33,7 @@ export default function FilesPanel({ files, activeFile, onSelectFile }: FilesPan
   const renderContent = useCallback(() => {
     if (files.length === 0) {
       return (
-        <div className="text-[#555] text-[13px] text-center py-10 px-4 leading-relaxed">
+        <div className="text-[#8e9eb0] text-[13px] text-center py-10 px-4 leading-relaxed">
           暂无文件
           <br />
           LLM 生成的代码将显示在这里
@@ -56,8 +56,8 @@ export default function FilesPanel({ files, activeFile, onSelectFile }: FilesPan
         onClick={() => onSelectFile(path)}
         className={`flex items-center gap-2 py-2 px-2.5 cursor-pointer rounded-md text-[13px] transition-colors mb-0.5 ${
           path === activeFile
-            ? "bg-[#0f3460] text-[#8bb4f9]"
-            : "hover:bg-[#1a3050]"
+            ? "bg-[#e3f0fb] text-[#4a8bc2]"
+            : "text-[#3d4f5f] hover:bg-[#f0f4f7]"
         }`}
         title={path}
       >
@@ -68,8 +68,8 @@ export default function FilesPanel({ files, activeFile, onSelectFile }: FilesPan
   }, [files, activeFile, onSelectFile]);
 
   return (
-    <div className="w-[260px] min-w-[200px] flex flex-col border-r border-[#2a2a4a] bg-[#16213e]">
-      <div className="py-3 px-4 text-[13px] font-semibold text-[#e6c07b] border-b border-[#2a2a4a] bg-[#0f3460] flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#e6c07b] before:rounded-full">
+    <div className="w-[260px] min-w-[200px] flex flex-col border-r border-[#e4e9f0] bg-[#f4f7fa]">
+      <div className="py-3 px-4 text-[13px] font-semibold text-[#d4a84b] border-b border-[#e4e9f0] bg-white flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#d4a84b] before:rounded-full">
         设计产物
       </div>
       <div className="flex-1 overflow-y-auto p-2">{renderContent()}</div>

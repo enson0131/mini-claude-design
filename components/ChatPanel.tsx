@@ -59,8 +59,8 @@ export default function ChatPanel({ entries, streamingText, isRunning, onSend }:
   );
 
   return (
-    <div className="w-[420px] min-w-[320px] h-full flex flex-col border-r border-[#2a2a4a] bg-[#0f1219]">
-      <div className="py-3.5 px-4.5 text-[13px] font-semibold text-[#8bb4f9] border-b border-[#1e2a3e] bg-[#141b2d] flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#7ec699] before:rounded-full">
+    <div className="w-[420px] min-w-[320px] h-full flex flex-col border-r border-[#e4e9f0] bg-[#f8fafb]">
+      <div className="py-3.5 px-4.5 text-[13px] font-semibold text-[#5b9bd5] border-b border-[#e4e9f0] bg-white flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#7cc4a8] before:rounded-full">
         对话
       </div>
 
@@ -72,15 +72,15 @@ export default function ChatPanel({ entries, streamingText, isRunning, onSend }:
         {/* 流式输出 */}
         {streamingText && (
           <div className="flex justify-start w-full">
-            <div className="max-w-[88%] py-2.5 px-3.5 rounded-2xl bg-[#1c2538] text-[#d4dce8] text-[13px] leading-[1.6] break-words whitespace-pre-wrap rounded-bl">
+            <div className="max-w-[88%] py-2.5 px-3.5 rounded-2xl bg-white text-[#3d4f5f] text-[13px] leading-[1.6] break-words whitespace-pre-wrap rounded-bl shadow-sm border border-[#e8edf2]">
               {streamingText}
-              <span className="inline-block w-[7px] h-[15px] bg-[#8bb4f9] ml-0.5 align-text-bottom animate-pulse" />
+              <span className="inline-block w-[7px] h-[15px] bg-[#5b9bd5] ml-0.5 align-text-bottom animate-pulse" />
             </div>
           </div>
         )}
       </div>
 
-      <div className="flex border-t border-[#1e2a3e] py-3.5 px-4 bg-[#0a0e17] gap-2 items-end">
+      <div className="flex border-t border-[#e4e9f0] py-3.5 px-4 bg-white gap-2 items-end">
         <textarea
           ref={textareaRef}
           value={inputValue}
@@ -89,12 +89,12 @@ export default function ChatPanel({ entries, streamingText, isRunning, onSend }:
           placeholder="描述你想要的界面设计或功能需求，例如：帮我制作一个响应式的个人博客首页..."
           rows={1}
           disabled={isRunning}
-          className="flex-1 bg-[#151c2c] border border-[#243049] text-[#e0e0e0] py-3 px-3.5 font-mono text-[13.5px] rounded-xl outline-none resize-none min-h-[48px] max-h-[160px] transition-[border-color,box-shadow] focus:border-[#4a7dcc] focus:shadow-[0_0_0_3px_rgba(74,125,204,0.15)] placeholder:text-[#3a4a5e]"
+          className="flex-1 bg-[#f4f7fa] border border-[#dce3ea] text-[#2c3e50] py-3 px-3.5 font-mono text-[13.5px] rounded-xl outline-none resize-none min-h-[48px] max-h-[160px] transition-[border-color,box-shadow] focus:border-[#5b9bd5] focus:shadow-[0_0_0_3px_rgba(91,155,213,0.12)] placeholder:text-[#a8bcc8]"
         />
         <button
           onClick={handleSend}
           disabled={isRunning}
-          className="bg-gradient-to-br from-[#1a56db] to-[#1e40af] text-white py-3 px-5 font-mono text-[13.5px] font-semibold rounded-xl cursor-pointer whitespace-nowrap transition-[transform,box-shadow,opacity] hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(26,86,219,0.35)] active:translate-y-0 disabled:opacity-35 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+          className="bg-gradient-to-br from-[#5b9bd5] to-[#4a8bc2] text-white py-3 px-5 font-mono text-[13.5px] font-semibold rounded-xl cursor-pointer whitespace-nowrap transition-[transform,box-shadow,opacity] hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(91,155,213,0.3)] active:translate-y-0 disabled:opacity-35 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
         >
           {isRunning ? "思考中..." : "发送"}
         </button>
@@ -109,7 +109,7 @@ function EntryRenderer({ entry }: { entry: ChatEntry }) {
     case "user":
       return (
         <div className="flex justify-end w-full">
-          <div className="max-w-[88%] py-2.5 px-3.5 rounded-2xl bg-gradient-to-br from-[#1a56db] to-[#1e40af] text-white text-[13px] leading-[1.6] break-words font-medium rounded-br">
+          <div className="max-w-[88%] py-2.5 px-3.5 rounded-2xl bg-gradient-to-br from-[#5b9bd5] to-[#4a8bc2] text-white text-[13px] leading-[1.6] break-words font-medium rounded-br shadow-sm">
             {entry.content}
           </div>
         </div>
@@ -117,25 +117,25 @@ function EntryRenderer({ entry }: { entry: ChatEntry }) {
     case "assistant":
       return (
         <div className="flex justify-start w-full">
-          <div className="max-w-[88%] py-2.5 px-3.5 rounded-2xl bg-[#1c2538] text-[#d4dce8] text-[13px] leading-[1.6] break-words whitespace-pre-wrap rounded-bl">
+          <div className="max-w-[88%] py-2.5 px-3.5 rounded-2xl bg-white text-[#3d4f5f] text-[13px] leading-[1.6] break-words whitespace-pre-wrap rounded-bl shadow-sm border border-[#e8edf2]">
             {entry.content}
           </div>
         </div>
       );
     case "system":
       return (
-        <div className="text-[#4a5a6e] text-[11.5px] text-center py-0.5">{entry.content}</div>
+        <div className="text-[#8e9eb0] text-[11.5px] text-center py-0.5">{entry.content}</div>
       );
     case "done":
       return (
-        <div className="text-[#58a6ff] text-[11.5px] text-center py-1 border-t border-dashed border-[#1e2a3e] mt-1">
+        <div className="text-[#5b9bd5] text-[11.5px] text-center py-1 border-t border-dashed border-[#dce3ea] mt-1">
           {entry.content}
         </div>
       );
     case "error":
       return (
         <div className="flex justify-start w-full">
-          <div className="max-w-[88%] bg-[rgba(220,53,69,0.12)] text-[#f56c6c] border border-[rgba(220,53,69,0.2)] rounded-[10px] py-2 px-3.5 text-xs">
+          <div className="max-w-[88%] bg-[rgba(229,115,115,0.08)] text-[#e57373] border border-[rgba(229,115,115,0.2)] rounded-[10px] py-2 px-3.5 text-xs">
             {entry.content}
           </div>
         </div>
@@ -155,7 +155,7 @@ function EntryRenderer({ entry }: { entry: ChatEntry }) {
     case "thinking":
       return (
         <div className="flex justify-start w-full">
-          <div className="max-w-[200px] bg-transparent text-[#5a6a7e] text-xs py-1.5 px-3 rounded-xl italic">
+          <div className="max-w-[200px] bg-transparent text-[#8e9eb0] text-xs py-1.5 px-3 rounded-xl italic">
             💡 {entry.content}
           </div>
         </div>

@@ -29,16 +29,16 @@ export default function ApiKeyDialog({ open, apiKey, onConfirm, onCancel }: ApiK
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/75 z-[1000] flex justify-center items-center">
-      <div className="bg-[#1a2744] border border-[#334466] rounded-xl p-7 w-[480px] max-w-[90vw] shadow-2xl">
-        <h2 className="text-base text-[#e0e0e0] mb-2.5">设置智谱 AI API Key</h2>
-        <p className="text-xs text-[#888] mb-3.5 leading-relaxed">
+    <div className="fixed inset-0 bg-black/30 z-[1000] flex justify-center items-center">
+      <div className="bg-white border border-[#e4e9f0] rounded-xl p-7 w-[480px] max-w-[90vw] shadow-2xl">
+        <h2 className="text-base text-[#2c3e50] mb-2.5">设置智谱 AI API Key</h2>
+        <p className="text-xs text-[#6b7f8e] mb-3.5 leading-relaxed">
           请输入你的智谱 AI API Key。前往{" "}
           <a
             href="https://open.bigmodel.cn"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#8bb4f9]"
+            className="text-[#5b9bd5]"
           >
             open.bigmodel.cn
           </a>{" "}
@@ -50,19 +50,19 @@ export default function ApiKeyDialog({ open, apiKey, onConfirm, onCancel }: ApiK
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="请输入 API Key..."
-          className="w-full bg-[#0f1929] border border-[#334466] text-[#e0e0e0] px-3 py-2.5 font-mono text-[13px] rounded-md outline-none focus:border-[#8bb4f9]"
+          className="w-full bg-[#f4f7fa] border border-[#dce3ea] text-[#2c3e50] px-3 py-2.5 font-mono text-[13px] rounded-md outline-none focus:border-[#5b9bd5] transition-colors"
           autoFocus
         />
         <div className="flex justify-end gap-2 mt-4.5">
           <button
             onClick={onCancel}
-            className="px-4.5 py-1.5 rounded-md bg-[#334466] text-[#ccc] text-[13px] cursor-pointer hover:bg-[#445577] transition-colors"
+            className="px-4.5 py-1.5 rounded-md bg-[#f4f7fa] text-[#5a6b7d] text-[13px] cursor-pointer hover:bg-[#e8f0f5] transition-colors border border-[#dce3ea]"
           >
             取消
           </button>
           <button
             onClick={handleConfirm}
-            className="px-4.5 py-1.5 rounded-md bg-[#8bb4f9] text-[#1a1a2e] text-[13px] font-bold cursor-pointer hover:bg-[#a0c4ff] transition-colors"
+            className="px-4.5 py-1.5 rounded-md bg-[#5b9bd5] text-white text-[13px] font-bold cursor-pointer hover:bg-[#4a8bc2] transition-colors"
           >
             确认
           </button>

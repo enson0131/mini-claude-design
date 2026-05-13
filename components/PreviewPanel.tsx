@@ -73,11 +73,11 @@ export default function PreviewPanel({
 
   if (!activeFile || !fileContent) {
     return (
-      <div className="flex-1 flex flex-col bg-[#0d1117] min-w-[400px]">
-        <div className="py-3 px-4 text-[13px] font-semibold text-[#7ec699] border-b border-[#2a2a4a] bg-[#0f3460] flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#7ec699] before:rounded-full">
+      <div className="flex-1 flex flex-col bg-white min-w-[400px]">
+        <div className="py-3 px-4 text-[13px] font-semibold text-[#7cc4a8] border-b border-[#e4e9f0] bg-white flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#7cc4a8] before:rounded-full">
           预览
         </div>
-        <div className="flex-1 flex flex-col items-center justify-center text-[#444] text-sm gap-3 bg-[#fafafa]">
+        <div className="flex-1 flex flex-col items-center justify-center text-[#8e9eb0] text-sm gap-3 bg-[#fafbfc]">
           <div className="text-5xl opacity-30">📰</div>
           <div>选择左侧文件或等待 LLM 生成代码</div>
         </div>
@@ -86,26 +86,26 @@ export default function PreviewPanel({
   }
 
   return (
-    <div className="flex-1 flex flex-col bg-[#0d1117] min-w-[400px]">
-      <div className="py-3 px-4 text-[13px] font-semibold text-[#7ec699] border-b border-[#2a2a4a] bg-[#0f3460] flex items-center justify-between">
-        <div className="flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#7ec699] before:rounded-full">
+    <div className="flex-1 flex flex-col bg-white min-w-[400px]">
+      <div className="py-3 px-4 text-[13px] font-semibold text-[#7cc4a8] border-b border-[#e4e9f0] bg-white flex items-center justify-between">
+        <div className="flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#7cc4a8] before:rounded-full">
           预览
         </div>
-        <span className="text-[#aaa] text-xs font-normal max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap">
+        <span className="text-[#8e9eb0] text-xs font-normal max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap">
           {activeFile}
         </span>
         <div className="flex gap-1.5">
           <button
             onClick={onRefresh}
             title="刷新预览"
-            className="bg-[#1a2744] border border-[#334466] text-[#8bb4f9] py-1 px-2.5 rounded cursor-pointer font-mono text-[11px] hover:bg-[#243555] transition-colors"
+            className="bg-[#f4f7fa] border border-[#dce3ea] text-[#5b9bd5] py-1 px-2.5 rounded cursor-pointer font-mono text-[11px] hover:bg-[#e8f0f8] transition-colors"
           >
             刷新
           </button>
           <button
             onClick={onOpenNewTab}
             title="新窗口打开"
-            className="bg-[#1a2744] border border-[#334466] text-[#8bb4f9] py-1 px-2.5 rounded cursor-pointer font-mono text-[11px] hover:bg-[#243555] transition-colors"
+            className="bg-[#f4f7fa] border border-[#dce3ea] text-[#5b9bd5] py-1 px-2.5 rounded cursor-pointer font-mono text-[11px] hover:bg-[#e8f0f8] transition-colors"
           >
             新窗口
           </button>
@@ -121,9 +121,9 @@ export default function PreviewPanel({
             title="预览"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#fafafa]">
-            <div className="max-w-[90%] max-h-[80%] overflow-auto bg-[#1a1a2e] text-[#e0e0e0] p-5 rounded-lg text-xs leading-relaxed whitespace-pre break-all text-left">
-              <div className="text-[#8bb4f9] mb-2 text-[13px]">{activeFile} (源码)</div>
+          <div className="absolute inset-0 flex items-center justify-center bg-[#fafbfc]">
+            <div className="max-w-[90%] max-h-[80%] overflow-auto bg-[#f4f7fa] text-[#3d4f5f] p-5 rounded-lg text-xs leading-relaxed whitespace-pre break-all text-left border border-[#e4e9f0]">
+              <div className="text-[#5b9bd5] mb-2 text-[13px]">{activeFile} (源码)</div>
               {fileContent.slice(0, 50000)}
             </div>
           </div>

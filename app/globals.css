@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ===== 全局样式 — Mini Claude Design 深色主题 ===== */
+/* ===== 全局样式 — Mini Claude Design 小清新主题 ===== */
 
 /* 滚动条 */
 ::-webkit-scrollbar {
@@ -11,17 +11,17 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334455;
+  background: #c8d6e0;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #445566;
+  background: #a8bcc8;
 }
 
 /* 工具卡片样式 */
 .msg-tool {
-  background: #151d2c;
-  border: 1px solid #243049;
+  background: #f4f7fa;
+  border: 1px solid #e0e8ef;
   border-radius: 10px;
   overflow: hidden;
   margin-top: 4px;

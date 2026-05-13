@@ -17,23 +17,23 @@ export default function ToolCard({ type, name, content }: ToolCardProps) {
       : content.slice(0, 100) + (content.length > 100 ? "...(点击展开)" : "");
 
   const icon = type === "call" ? "⚡" : "✅";
-  const nameColor = type === "call" ? "text-[#7ec699]" : "text-[#e6c07b]";
+  const nameColor = type === "call" ? "text-[#7cc4a8]" : "text-[#d4a84b]";
 
   const toggleExpand = useCallback(() => setExpanded((v) => !v), []);
 
   return (
     <div className={`msg-tool msg-tool-${type} ${expanded ? "expanded" : ""}`}>
       <div
-        className="flex items-center gap-1.5 py-1.5 px-3 cursor-pointer select-none transition-colors text-xs hover:bg-[#1a2436]"
+        className="flex items-center gap-1.5 py-1.5 px-3 cursor-pointer select-none transition-colors text-xs hover:bg-[#e8f0f5]"
         onClick={toggleExpand}
       >
         <span className="shrink-0 text-[13px]">{icon}</span>
         <span className={`font-semibold ${nameColor}`}>{name}</span>
-        <span className="text-[#8899aa] text-[11px] overflow-hidden text-ellipsis whitespace-nowrap flex-1 mr-2">
+        <span className="text-[#8e9eb0] text-[11px] overflow-hidden text-ellipsis whitespace-nowrap flex-1 mr-2">
           {summaryText}
         </span>
         <span
-          className={`text-[#556677] text-[11px] shrink-0 w-4 text-center transition-transform ${
+          className={`text-[#a8bcc8] text-[11px] shrink-0 w-4 text-center transition-transform ${
             expanded ? "rotate-180" : ""
           }`}
         >
@@ -45,7 +45,7 @@ export default function ToolCard({ type, name, content }: ToolCardProps) {
           expanded ? "max-h-[300px] overflow-y-auto" : "max-h-0"
         }`}
       >
-        <div className="py-2 px-3 border-t border-[#1e2a3e] font-mono text-[11.5px] leading-[1.55] text-[#a8bccf] whitespace-pre-wrap break-all">
+        <div className="py-2 px-3 border-t border-[#dce3ea] font-mono text-[11.5px] leading-[1.55] text-[#5a6b7d] whitespace-pre-wrap break-all">
           {content}
         </div>
       </div>
