@@ -59,7 +59,7 @@ export default function ChatPanel({ entries, streamingText, isRunning, onSend }:
   );
 
   return (
-    <div className="w-[420px] min-w-[320px] flex flex-col border-r border-[#2a2a4a] bg-[#0f1219]">
+    <div className="w-[420px] min-w-[320px] h-full flex flex-col border-r border-[#2a2a4a] bg-[#0f1219]">
       <div className="py-3.5 px-4.5 text-[13px] font-semibold text-[#8bb4f9] border-b border-[#1e2a3e] bg-[#141b2d] flex items-center gap-2 before:content-[''] before:w-[7px] before:h-[7px] before:bg-[#7ec699] before:rounded-full">
         对话
       </div>

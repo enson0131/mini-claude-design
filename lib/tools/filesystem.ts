@@ -9,6 +9,7 @@ export function getFileStore() {
   return fileStore;
 }
 
+// 写文件
 const writeTool: ToolDefinition = {
   name: "write_file",
   description: `Write content to a file in the project. Creates parent directories automatically.
@@ -34,6 +35,7 @@ Overwrites if file already exists.`,
   },
 };
 
+// 读文件
 const readTool: ToolDefinition = {
   name: "read_file",
   description: `Read the content of a file. Returns the full text content.
@@ -55,6 +57,7 @@ If the file doesn't exist, returns an error message.`,
   },
 };
 
+// 列出所有文件
 const listTool: ToolDefinition = {
   name: "list_files",
   description: `List all files in the project. Returns a flat list of file paths.`,

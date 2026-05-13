@@ -1,14 +1,38 @@
 "use client";
 
 import { useCallback } from "react";
+import { getFileStore } from "@/lib/tools/filesystem";
 
-interface PreviewPanelProps {
-  activeFile: string | null;
-  fileContent: string | null;
-  blobUrlMap: Map<string, string>;
+type PreviewPanelProps = {
+  activeFile?: string | null;
+  fileContent?: string | null;
+  blobUrlMap?: Map<string, string>;
   onRefresh: () => void;
   onOpenNewTab: () => void;
+};
+
+const blobUrlCache = new Map();
+
+function getBlobUrl(path: string) {
+  if (blobUrlCache.has(path)) return blobUrlCache.get(path);
+  const store = getFileStore();
+  const content = store.get(path);
+  if (content === undefined) return null;
+  const ext = path?.split?.('.')?.pop()?.toLowerCase() || 'text';
+  const mime = {
+      css: 'text/css',
+      js: 'application/javascript',
+      json: 'application/json',
+      svg: 'image/svg+xml',
+      html: 'text/html',
+      htm: 'text/html',
+      text: 'text/plain',
+  }[ext];
+  const url = URL.createObjectURL(new Blob([content], { type: mime }));
+  blobUrlCache.set(path, url);
+  return url;
 }
+
 
 export default function PreviewPanel({
   activeFile,
@@ -21,31 +45,25 @@ export default function PreviewPanel({
 
   // 解析 HTML 中的资源引用，替换为 blob URL
   const resolveHtml = useCallback(
-    (html: string, basePath: string): string => {
-      let resolved = html;
-      const dir = basePath.substring(0, basePath.lastIndexOf("/") + 1);
-
-      resolved = resolved.replace(
-        /<link\s[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/gi,
-        (match, href: string) => {
-          const fullPath = href.startsWith("/") ? href.slice(1) : dir + href;
-          const url = blobUrlMap.get(fullPath);
-          if (url) return match.replace(href, url);
-          return match;
-        }
-      );
-
-      resolved = resolved.replace(
-        /<script\s[^>]*src=["']([^"']+)["'][^>]*><\/script>/gi,
-        (match, src: string) => {
-          const fullPath = src.startsWith("/") ? src.slice(1) : dir + src;
-          const url = blobUrlMap.get(fullPath);
+    (htmlContent: string, basePath: string): string => {
+      let resolved = htmlContent;
+        const dir = basePath.substring(0, basePath.lastIndexOf('/') + 1);
+        resolved = resolved.replace(
+          /<link\s[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/gi,
+          (match, href) => {
+            const fullPath = href.startsWith('/') ? href.slice(1) : dir + href;
+            const url = getBlobUrl(fullPath);
+            if (url) return match.replace(href, url);
+            return match;
+          },
+        );
+        resolved = resolved.replace(/<script\s[^>]*src=["']([^"']+)["'][^>]*><\/script>/gi, (match, src) => {
+          const fullPath = src.startsWith('/') ? src.slice(1) : dir + src;
+          const url = getBlobUrl(fullPath);
           if (url) return match.replace(src, url);
           return match;
-        }
-      );
-
-      return resolved;
+        });
+        return resolved;
     },
     [blobUrlMap]
   );
