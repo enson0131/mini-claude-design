@@ -153,6 +153,7 @@ export interface AgentCallbacks {
   onStreamText?: (chunk: string) => void;
   onToolCall?: (name: string, input: Record<string, unknown>) => void;
   onToolResult?: (name: string, result: string) => void;
+  onAssistantMessage?: (text: string) => void;
   onDone?: (usage: { prompt_tokens: number; completion_tokens: number }) => void;
   onSnip?: (before: number, after: number) => void;
 }
@@ -220,6 +221,7 @@ export async function runAgent(
     messages.push(assistantMsg);
 
     if (fullContent) {
+      callbacks.onAssistantMessage?.(fullContent);
       callbacks.onText?.("\n");
     }
 

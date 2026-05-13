@@ -34,7 +34,7 @@ export default function HomePage() {
   // API Key 弹窗
   const [showApiKeyDialog, setShowApiKeyDialog] = useState(false);
   const [connected, setConnected] = useState(false);
-
+  const streamingMessageRef = useRef("");
   // 模型
   const [model, setModelState] = useState("glm-4-flash");
 
@@ -158,13 +158,23 @@ export default function HomePage() {
       addEntry("user", `\n${input}\n`);
 
       try {
+        streamingMessageRef.current = "";
+
         const callbacks: AgentCallbacks = {
           onText(t) {
             setStreamingText("");
             addEntry("system", t);
           },
           onStreamText(chunk) {
+            streamingMessageRef.current += chunk;
             setStreamingText((prev) => prev + chunk);
+          },
+          onAssistantMessage(text) {
+            const content = text.trim();
+            if (!content) return;
+            addEntry("assistant", content);
+            streamingMessageRef.current = "";
+            setStreamingText("");
           },
           onToolCall(name, inputObj) {
             addEntry("tool-call", JSON.stringify(inputObj, null, 2), name);
@@ -199,10 +209,12 @@ export default function HomePage() {
           onDone(usage) {
             const t = (usage.prompt_tokens || 0) + (usage.completion_tokens || 0);
             setStreamingText("");
+            streamingMessageRef.current = "";
             addEntry("done", `📊 tokens: ${t}`);
           },
           onSnip(before, after) {
             setStreamingText("");
+            streamingMessageRef.current = "";
             addEntry("system", `✂️ 裁剪上下文: ${before}→${after}`);
           },
         };
@@ -212,6 +224,7 @@ export default function HomePage() {
         addEntry("system", "--- 可以继续调整 ---");
       } catch (err) {
         setStreamingText("");
+        streamingMessageRef.current = "";
         addEntry("error", `Error: ${(err as Error).message}`);
         if ((err as Error).message.includes("API Key")) {
           setShowApiKeyDialog(true);
